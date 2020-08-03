@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.pentaho.reporting.library:librepository:9.1.0.0-255">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/org/pentaho/reporting/library/librepository/9.1.0.0-255/librepository-9.1.0.0-255.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/org/pentaho/reporting/library/librepository/9.1.0.0-255/librepository-9.1.0.0-255-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/org/pentaho/reporting/library/librepository/9.1.0.0-255/librepository-9.1.0.0-255-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

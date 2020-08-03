@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: pentaho:pentaho-capability-manager:9.1.0.0-255">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/pentaho/pentaho-capability-manager/9.1.0.0-255/pentaho-capability-manager-9.1.0.0-255.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/pentaho/pentaho-capability-manager/9.1.0.0-255/pentaho-capability-manager-9.1.0.0-255-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../AppData/Maven/Repository/pentaho/pentaho-capability-manager/9.1.0.0-255/pentaho-capability-manager-9.1.0.0-255-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

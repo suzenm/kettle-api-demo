@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-database/demo-database.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-database/demo-database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generating-transformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generating-transformation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-transformation/demo-transformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-transformation/demo-transformation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/kettle-demo.iml" filepath="$PROJECT_DIR$/kettle-demo/kettle-demo.iml" />
+    </modules>
+  </component>
+</project>
