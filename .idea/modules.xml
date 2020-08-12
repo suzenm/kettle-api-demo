@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-database/demo-database.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-database/demo-database.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generating-transformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generating-transformation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-database/demo-datebase.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-database/demo-datebase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generatingtransformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generatingtransformation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-read-from-step/demo-read-from-step.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-read-from-step/demo-read-from-step.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-transformation/demo-transformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-transformation/demo-transformation.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/kettle-demo.iml" filepath="$PROJECT_DIR$/kettle-demo/kettle-demo.iml" />
     </modules>
