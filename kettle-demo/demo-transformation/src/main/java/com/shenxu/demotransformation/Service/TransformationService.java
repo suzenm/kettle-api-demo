@@ -20,7 +20,7 @@ public class TransformationService implements CommandLineRunner {
     public void run(String... args) throws Exception {
         KettleEnvironment.init();
 
-        Trans trans = runTransfomationFromFileSystem("kettle-demo/demo-transformation/src/main/resources/etl/test.ktr");
+        Trans trans = runTransfomationFromFileSystem("etl/copy_sourcefilm_category_to_target.ktr");
 
         LoggingBuffer appender = KettleLogStore.getAppender();
         String logText = appender.getBuffer(trans.getLogChannelId(), false).toString();

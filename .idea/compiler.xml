@@ -9,6 +9,7 @@
         <module name="demo-read-from-step" />
         <module name="demo-generatingtransformation" />
         <module name="demo-dynamic-transformation" />
+        <module name="demo-dynamic-job" />
         <module name="demo-datebase" />
         <module name="demo-transformation" />
       </profile>
@@ -16,6 +17,7 @@
     <bytecodeTargetLevel>
       <module name="demo-database" target="1.8" />
       <module name="demo-datebase" target="1.8" />
+      <module name="demo-dynamic-job" target="1.8" />
       <module name="demo-dynamic-transformation" target="1.8" />
       <module name="demo-generating-transformation" target="1.8" />
       <module name="demo-generatingtransformation" target="1.8" />
@@ -28,6 +30,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo-database" options="-parameters" />
       <module name="demo-datebase" options="-parameters" />
+      <module name="demo-dynamic-job" options="-parameters" />
       <module name="demo-dynamic-transformation" options="-parameters" />
       <module name="demo-generating-transformation" options="-parameters" />
       <module name="demo-generatingtransformation" options="-parameters" />
