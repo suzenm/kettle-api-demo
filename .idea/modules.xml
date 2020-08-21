@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-database/demo-datebase.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-database/demo-datebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-job/demo-dynamic-job.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-dynamic-job/demo-dynamic-job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-job-multi-database/demo-dynamic-job-multi-database.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-dynamic-job-multi-database/demo-dynamic-job-multi-database.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-transformation/demo-dynamic-transformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-dynamic-transformation/demo-dynamic-transformation.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generatingtransformation.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-generating-transformation/demo-generatingtransformation.iml" />
       <module fileurl="file://$PROJECT_DIR$/kettle-demo/demo-read-from-step/demo-read-from-step.iml" filepath="$PROJECT_DIR$/kettle-demo/demo-read-from-step/demo-read-from-step.iml" />

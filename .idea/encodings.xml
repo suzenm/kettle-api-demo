@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/kettle-demo/demo-database/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-job-multi-database/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-job/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kettle-demo/demo-dynamic-transformation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kettle-demo/demo-generating-transformation/src/main/java" charset="UTF-8" />

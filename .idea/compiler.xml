@@ -7,17 +7,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="demo-read-from-step" />
+        <module name="demo-dynamic-job" />
+        <module name="demo-dynamic-job-multi-database" />
+        <module name="demo-transformation" />
         <module name="demo-generatingtransformation" />
         <module name="demo-dynamic-transformation" />
-        <module name="demo-dynamic-job" />
         <module name="demo-datebase" />
-        <module name="demo-transformation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo-database" target="1.8" />
       <module name="demo-datebase" target="1.8" />
       <module name="demo-dynamic-job" target="1.8" />
+      <module name="demo-dynamic-job-multi-database" target="1.8" />
       <module name="demo-dynamic-transformation" target="1.8" />
       <module name="demo-generating-transformation" target="1.8" />
       <module name="demo-generatingtransformation" target="1.8" />
@@ -31,6 +33,7 @@
       <module name="demo-database" options="-parameters" />
       <module name="demo-datebase" options="-parameters" />
       <module name="demo-dynamic-job" options="-parameters" />
+      <module name="demo-dynamic-job-multi-database" options="-parameters" />
       <module name="demo-dynamic-transformation" options="-parameters" />
       <module name="demo-generating-transformation" options="-parameters" />
       <module name="demo-generatingtransformation" options="-parameters" />

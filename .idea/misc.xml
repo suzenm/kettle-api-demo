@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/kettle-demo/demo-read-from-step/pom.xml" />
         <option value="$PROJECT_DIR$/kettle-demo/demo-dynamic-transformation/pom.xml" />
         <option value="$PROJECT_DIR$/kettle-demo/demo-dynamic-job/pom.xml" />
+        <option value="$PROJECT_DIR$/kettle-demo/demo-dynamic-job-multi-database/pom.xml" />
       </list>
     </option>
   </component>
