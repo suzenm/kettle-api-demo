@@ -1,6 +1,6 @@
 package com.shenxu.demodynamicjobmultidatabase.Database;
 
-public abstract class Database {
+public abstract class DatabaseConfig {
     private String name;
     private String access;
     private String host;
@@ -9,6 +9,20 @@ public abstract class Database {
     private String password;
     private String port;
     private String type;
+
+    public DatabaseConfig() {
+    }
+
+    public DatabaseConfig(String name, String access, String host, String database, String user, String password, String port, String type) {
+        this.name = name;
+        this.access = access;
+        this.host = host;
+        this.database = database;
+        this.user = user;
+        this.password = password;
+        this.port = port;
+        this.type = type;
+    }
 
     public String getType() {
         return type;

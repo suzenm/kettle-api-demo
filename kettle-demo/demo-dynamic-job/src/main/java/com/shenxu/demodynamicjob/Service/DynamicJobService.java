@@ -41,7 +41,7 @@ public class DynamicJobService implements CommandLineRunner {
 
         JobMeta jobMeta = GenerateJob("copy");
         boolean ok = SaveFile("etl/", jobMeta.getFilename(), Const.STRING_JOB_DEFAULT_EXT, jobMeta);
-        JobMeta fileJobMeta = new JobMeta("etl/demo_job.kjb", null);
+        JobMeta fileJobMeta = new JobMeta("etl/"+ jobMeta.getFilename() +".kjb", null);
         Result rs = ExecutedJob(fileJobMeta);
 
     }

@@ -1,0 +1,582 @@
+<job>
+  <name>copy_multi_database</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2020/08/24 11:07:07.537</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2020/08/24 11:07:07.537</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>source</name>
+    <server>10.20.32.146</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>ora11g</database>
+    <port>1521</port>
+    <username>tg_qs</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce64d9adbec9</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>target</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>oracle_test</database>
+    <port>-1</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce71da9fa6d4</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.serverTimezone</code>
+        <attribute>UTC</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Start</name>
+      <description>A job starts to process here.</description>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>250</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create TG_QS.LC_TPRODUCTMARKET</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_VASTLY_REDEEM_RATIO DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_UNIT DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_RATIO DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_NAV_YEAR_RATE DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_RATE DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_VALUE_LINE DOUBLE
+;
+ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
+;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>150</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans TG_QS.LC_TPRODUCTMARKET</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcetg_qslc_tproductmarket_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceTG_QS.LC_TPRODUCTMARKET_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>150</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create TG_QS.LC_THPRODUCTMARKET</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE `TG_QS.LC_THPRODUCTMARKET`
+(
+  VC_TENANT_ID VARCHAR(32)
+, VC_DATE VARCHAR(8)
+, VC_PRODUCT_CODE VARCHAR(20)
+, VC_PRODUCT_NAME VARCHAR(200)
+, C_SHARE_TYPE CHAR(1)
+, EN_NAV DECIMAL(16, 8)
+, EN_TOTAL_SHARE DECIMAL(16, 2)
+, C_VASTLY_REDEEM_FLAG CHAR(1)
+, EN_VASTLY_REDEEM_RATIO DOUBLE
+, C_PRODUCT_STATE CHAR(1)
+, EN_FACE_VALUE DECIMAL(16, 8)
+, C_MONEY_TYPE VARCHAR(3)
+, VC_ISSUE_DATE VARCHAR(8)
+, VC_SETUP_DATE VARCHAR(8)
+, VC_ORGANIGER VARCHAR(36)
+, VC_PRODUCT_MANAGER VARCHAR(36)
+, VC_TA_NAME VARCHAR(100)
+, VC_TRUSTEE VARCHAR(36)
+, VC_TA_CODE VARCHAR(18)
+, EN_PRODUCT_INCOME DECIMAL(16, 2)
+, EN_PRODUCT_INCOME_UNIT DOUBLE
+, EN_PRODUCT_INCOME_RATIO DOUBLE
+, VC_NAV_DATE VARCHAR(8)
+, EN_TOTAL_NAV DECIMAL(16, 8)
+, C_PUBLISH_FLAG CHAR(1)
+, C_PRODUCT_INCOME_FLAG CHAR(1)
+, C_YIELD_FLAG CHAR(1)
+, C_NAV_TYPE CHAR(1)
+, EN_NAV_YEAR_RATE DOUBLE
+, EN_PRODUCT_INCOME_RATE DOUBLE
+, C_PRODUCT_INCOME_RATE_FLAG CHAR(1)
+, VC_HOPE_ALLOT_END_DATE VARCHAR(8)
+, VC_HOPE_REDEEM_END_DATE VARCHAR(8)
+, VC_PRODUCT_OPEN_DATE VARCHAR(8)
+, C_INCOME_FLAG CHAR(1)
+, EN_INST_MAX_REDEEM DECIMAL(16, 2)
+, EN_INDI_MAX_REDEEM DECIMAL(16, 2)
+, EN_INST_DAY_MAX_SUM_REDEEM DECIMAL(16, 2)
+, EN_INDI_DAY_MAX_SUM_REDEEM DECIMAL(16, 2)
+, EN_INST_DAY_MAX_SUM_BUY DECIMAL(16, 2)
+, EN_INDI_DAY_MAX_SUM_BUY DECIMAL(16, 2)
+, EN_INST_MAX_PURCHASE DECIMAL(16, 2)
+, EN_INDI_MAX_PURCHASE DECIMAL(16, 2)
+, EN_MIN_REDEMPTION_VOL DECIMAL(16, 2)
+, EN_MIN_APP_BIDS_AMOUNT_BY_INST DECIMAL(16, 2)
+, EN_MIN_APP_BIDS_AMOUNT_BY_INDI DECIMAL(16, 2)
+, EN_MIN_BIDS_AMOUNT_BY_INST DECIMAL(16, 2)
+, EN_MIN_BIDS_AMOUNT_BY_INDI DECIMAL(16, 2)
+, EN_MAX_SUBS_AMOUNT_BY_INST DECIMAL(16, 2)
+, EN_MAX_SUBS_AMOUNT_BY_INDI DECIMAL(16, 2)
+, EN_MIN_SUBS_AMOUNT_BY_INDI DECIMAL(16, 2)
+, EN_INDI_APP_SUBS_AMOUNT DECIMAL(16, 2)
+, EN_MIN_AMOUNT_BY_INST DECIMAL(16, 2)
+, EN_INST_APP_SUBS_AMOUNT DECIMAL(16, 2)
+, EN_TRADING_PRICE DECIMAL(16, 8)
+, EN_VALUE_LINE DOUBLE
+, EN_PRODUCT_SIZE DECIMAL(16, 2)
+, EN_GUARANTEED_NAV DECIMAL(16, 8)
+, C_INSERT_BY_MARKET CHAR(1)
+, C_OLD_PRODUCT_STATE CHAR(1)
+, C_CONVERT_STATUS CHAR(1)
+, C_PERIODIC_STATUS CHAR(1)
+, EN_AMOUNT_OF_PERIODIC_SUBS DECIMAL(16, 2)
+, EN_MIN_INTERCONVERT_VOL DECIMAL(16, 2)
+, GMT_CREATE DATETIME
+, GMT_MODIFIED DATETIME
+, L_NODE DOUBLE
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>250</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans TG_QS.LC_THPRODUCTMARKET</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcetg_qslc_thproductmarket_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceTG_QS.LC_THPRODUCTMARKET_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>250</yloc>
+      <attributes_kjc/>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>create TG_QS.LC_TPRODUCTMARKET</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>create TG_QS.LC_TPRODUCTMARKET</from>
+      <to>trans TG_QS.LC_TPRODUCTMARKET</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans TG_QS.LC_TPRODUCTMARKET</from>
+      <to>create TG_QS.LC_THPRODUCTMARKET</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create TG_QS.LC_THPRODUCTMARKET</from>
+      <to>trans TG_QS.LC_THPRODUCTMARKET</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes/>
+</job>

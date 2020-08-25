@@ -1,25 +1,56 @@
 package com.shenxu.demodynamicjobmultidatabase.Service.Impl;
 
-import com.shenxu.demodynamicjobmultidatabase.Database.Database;
-import com.shenxu.demodynamicjobmultidatabase.Database.MySQLDatabase;
+import com.shenxu.demodynamicjobmultidatabase.Database.DatabaseConfig;
+import com.shenxu.demodynamicjobmultidatabase.Database.MySQLDatabaseConfig;
 import com.shenxu.demodynamicjobmultidatabase.Service.DynamicJobService;
 import org.apache.commons.io.FileUtils;
 import org.pentaho.di.core.Const;
+import org.pentaho.di.core.ObjectLocationSpecificationMethod;
 import org.pentaho.di.core.Result;
+import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
+import org.pentaho.di.core.exception.KettleDatabaseException;
 import org.pentaho.di.core.exception.KettleException;
+import org.pentaho.di.core.exception.KettleStepException;
+import org.pentaho.di.core.gui.Point;
+import org.pentaho.di.core.util.Utils;
+import org.pentaho.di.job.Job;
+import org.pentaho.di.job.JobHopMeta;
 import org.pentaho.di.job.JobMeta;
+import org.pentaho.di.job.entries.sql.JobEntrySQL;
+import org.pentaho.di.job.entries.trans.JobEntryTrans;
+import org.pentaho.di.job.entry.JobEntryCopy;
+import org.pentaho.di.trans.TransHopMeta;
 import org.pentaho.di.trans.TransMeta;
+import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.steps.tableinput.TableInputMeta;
+import org.pentaho.di.trans.steps.tableoutput.TableOutputMeta;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class DynamicJobServiceImpl implements DynamicJobService {
-    @Override
-    public TransMeta generateTransformation(String name) {
-        return null;
+
+    private DatabaseConfig source;
+    private DatabaseConfig target;
+
+    public DynamicJobServiceImpl() {
+    }
+
+    public DynamicJobServiceImpl(DatabaseConfig source, DatabaseConfig target) {
+        this.source = source;
+        this.target = target;
+    }
+
+    public void jobService() throws IOException, KettleException {
+        JobMeta jobMeta = generateJob("copy_multi_database");
+        boolean ok = saveFile("etl/", jobMeta.getFilename(), Const.STRING_JOB_DEFAULT_EXT, jobMeta);
+        System.out.println(ok);
+        JobMeta fileJobMeta = new JobMeta("etl/"+ jobMeta.getFilename() +".kjb", null);
+        Result rs = executedJob(fileJobMeta);
     }
 
     @Override
@@ -48,16 +79,120 @@ public class DynamicJobServiceImpl implements DynamicJobService {
 
     @Override
     public Result executedJob(JobMeta jobMeta) {
-        return null;
+        Job job = new Job(null, jobMeta);
+        job.start();
+        job.waitUntilFinished();
+        return job.getResult();
     }
 
     @Override
     public JobMeta generateJob(String name) {
-        return null;
+        JobMeta jobMeta = new JobMeta();
+        jobMeta.setName(name);
+        jobMeta.setFilename(name + "_job");
+
+        JobEntryCopy startCopy = JobMeta.createStartEntry();
+        final Point location = new Point(50, 50);
+        startCopy.setLocation(location);
+        startCopy.setDrawn();
+        jobMeta.addJobEntry(startCopy);
+
+        DatabaseMeta sourceMeta = generateDatabase(source);
+        DatabaseMeta targetMeta = generateDatabase(target);
+        jobMeta.setDatabases(new ArrayList<DatabaseMeta>(){{
+            add(sourceMeta);
+            add(targetMeta);
+        }});
+
+        String[] tablesWithSchema = new String[0];
+        Database sourceDatabase = new Database(null, sourceMeta);
+        try {
+            sourceDatabase.connect();
+            tablesWithSchema = sourceDatabase.getTablenames(true);
+            System.out.println(sourceDatabase.getSchemas()[0]);
+            System.out.println(sourceDatabase.getTablenames(sourceDatabase.getSchemas()[0], true)[0]);
+            sourceDatabase.disconnect();
+        } catch (KettleDatabaseException e) {
+            e.printStackTrace();
+        }
+//        String[] tables = filterOfTable(tablesWithSchema, sourceMeta.getDatabaseName());
+        String[] tables = tablesWithSchema;
+
+        JobEntryCopy previous = startCopy;
+        for (String table : tables) {
+            System.out.println(table);
+            TransMeta transMeta = new TransMeta();
+            transMeta.setName(jobMeta.getName() + "_source" + table + "_to_target");
+            transMeta.addDatabase(sourceMeta);
+            transMeta.addDatabase(targetMeta);
+
+            TableInputMeta tableInputMeta = new TableInputMeta();
+            tableInputMeta.setDefault();
+            tableInputMeta.setDatabaseMeta(sourceMeta);
+            tableInputMeta.setSQL("select * from " + table);
+            StepMeta tableInputStep = new StepMeta("table input", tableInputMeta);
+            tableInputStep.setLocation(100, 300);
+            tableInputStep.setDraw(true);
+            transMeta.addStep(tableInputStep);
+
+            TableOutputMeta tableOutputMeta = new TableOutputMeta();
+            tableOutputMeta.setDefault();
+            tableOutputMeta.setDatabaseMeta(targetMeta);
+            tableOutputMeta.setTableName(table);
+            StepMeta tableOutputStep = new StepMeta("table output", tableOutputMeta);
+            tableOutputStep.setLocation(300, 300);
+            tableOutputStep.setDraw(true);
+            transMeta.addStep(tableOutputStep);
+
+            transMeta.addTransHop(new TransHopMeta(tableInputStep, tableOutputStep));
+            try {
+                boolean ok = saveFile("etl/", transMeta.getName(), Const.STRING_TRANS_DEFAULT_EXT, transMeta);
+            } catch (KettleException | IOException e) {
+                e.printStackTrace();
+            }
+
+            location.x = 250;
+            location.y += 100;
+            String sql = getSQLString(sourceMeta, tableInputMeta, transMeta);
+
+            if (!Utils.isEmpty(sql)) {
+                JobEntrySQL jobEntrySQL = new JobEntrySQL("create " + table);
+                jobEntrySQL.setDatabase(targetMeta);
+                jobEntrySQL.setSQL(sql);
+
+                JobEntryCopy sqlJobEntryCopy = new JobEntryCopy();
+                sqlJobEntryCopy.setEntry(jobEntrySQL);
+                sqlJobEntryCopy.setLocation(new Point(location.x, location.y));
+                sqlJobEntryCopy.setDrawn();
+                jobMeta.addJobEntry(sqlJobEntryCopy);
+                JobHopMeta sqlJobHopMeta = new JobHopMeta(previous, sqlJobEntryCopy);
+                jobMeta.addJobHop(sqlJobHopMeta);
+                previous = sqlJobEntryCopy;
+            }
+
+            JobEntryTrans transJobEntryTrans = new JobEntryTrans("trans " + table);
+            transJobEntryTrans.setTransname(transMeta.getName());
+            transJobEntryTrans.setSpecificationMethod(ObjectLocationSpecificationMethod.FILENAME);
+            transJobEntryTrans.setFileName( Const.createFilename( "${"
+                    + Const.INTERNAL_VARIABLE_JOB_FILENAME_DIRECTORY + "}", transMeta.getName(), "."
+                    + Const.STRING_TRANS_DEFAULT_EXT ) );
+            System.out.println(transJobEntryTrans.getFilename());
+//            transJobEntryTrans.setFileName("etl/" + transMeta.getName() + "." + Const.STRING_TRANS_DEFAULT_EXT);
+            JobEntryCopy transJobEntryCopy = new JobEntryCopy(transJobEntryTrans);
+            location.x += 400;
+            transJobEntryCopy.setLocation(new Point(location.x, location.y));
+            transJobEntryCopy.setDrawn();
+            jobMeta.addJobEntry(transJobEntryCopy);
+
+            JobHopMeta transJobHopMeta = new JobHopMeta(previous, transJobEntryCopy);
+            jobMeta.addJobHop(transJobHopMeta);
+            previous = transJobEntryCopy;
+        }
+        return jobMeta;
     }
 
     @Override
-    public DatabaseMeta generateDatabase(Database database) {
+    public DatabaseMeta generateDatabase(DatabaseConfig database) {
         DatabaseMeta databaseMeta = new DatabaseMeta();
         databaseMeta.setValues(
                 database.getName(),
@@ -69,8 +204,8 @@ public class DynamicJobServiceImpl implements DynamicJobService {
                 database.getUser(),
                 database.getPassword()
         );
-        if ("MySQL".equals(database.getType()) && database instanceof MySQLDatabase) {
-            MySQLDatabase mySQLDatabase = (MySQLDatabase) database;
+        if ("MySQL".equals(database.getType()) && database instanceof MySQLDatabaseConfig) {
+            MySQLDatabaseConfig mySQLDatabase = (MySQLDatabaseConfig) database;
             Properties properties = new Properties();
             properties.setProperty("EXTRA_OPTION_MYSQL.serverTimezone", mySQLDatabase.getServerTimezone());
             databaseMeta.setAttributes(properties);
@@ -80,11 +215,31 @@ public class DynamicJobServiceImpl implements DynamicJobService {
 
     @Override
     public String[] filterOfTable(String[] tables, String databaseName) {
-        return new String[0];
+        List<String> tablesOfDatabase = new ArrayList<>();
+        if (tables == null) {
+            return tablesOfDatabase.toArray(new String[0]);
+        }
+        for (String table : tables) {
+            if (table.startsWith(databaseName)) {
+                tablesOfDatabase.add(table.substring(databaseName.length() + 1));
+            }
+        }
+        return tablesOfDatabase.toArray(new String[0]);
     }
 
     @Override
-    public String getSQLString(DatabaseMeta databaseMeta, TableInputMeta tii, TransMeta transMeta) {
-        return null;
+    public String getSQLString(DatabaseMeta sourceDbInfo, TableInputMeta tii, TransMeta transMeta) {
+        // First set the limit to 1 to speed things up!
+        String tmpSql = tii.getSQL();
+        tii.setSQL( tii.getSQL() + sourceDbInfo.getLimitClause( 1 ) );
+        String sql = null;
+        try {
+            sql = transMeta.getSQLStatementsString();
+        } catch ( KettleStepException kse ) {
+            kse.printStackTrace();
+        }
+        // remove the limit
+        tii.setSQL( tmpSql );
+        return sql;
     }
 }
