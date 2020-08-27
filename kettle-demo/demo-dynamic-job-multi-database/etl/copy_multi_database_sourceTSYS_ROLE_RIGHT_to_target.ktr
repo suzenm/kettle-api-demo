@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>copy_multi_database_sourceTG_QS.LC_THPRODUCTMARKET_to_target</name>
+    <name>copy_multi_database_sourceTSYS_ROLE_RIGHT_to_target</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -426,9 +426,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2020/08/27 15:28:54.200</created_date>
+    <created_date>2020/08/27 16:12:46.507</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/08/27 15:28:54.200</modified_date>
+    <modified_date>2020/08/27 16:12:46.507</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
@@ -491,7 +491,7 @@
       <schema_name/>
     </partitioning>
     <connection>source</connection>
-    <sql>select * from TG_QS.LC_THPRODUCTMARKET</sql>
+    <sql>select * from ZXZT.TSYS_ROLE_RIGHT</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -525,7 +525,7 @@
     </partitioning>
     <connection>target</connection>
     <schema/>
-    <table>TG_QS.LC_THPRODUCTMARKET</table>
+    <table>TSYS_ROLE_RIGHT</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>

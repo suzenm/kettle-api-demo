@@ -2,6 +2,7 @@ package com.shenxu.demodynamicjobmultidatabase.Service.Impl;
 
 import com.shenxu.demodynamicjobmultidatabase.Database.DatabaseConfig;
 import com.shenxu.demodynamicjobmultidatabase.Database.MySQLDatabaseConfig;
+import com.shenxu.demodynamicjobmultidatabase.Database.OracleDatabaseConfig;
 import com.shenxu.demodynamicjobmultidatabase.Service.DynamicJobService;
 import org.apache.commons.io.FileUtils;
 import org.pentaho.di.core.Const;
@@ -9,6 +10,8 @@ import org.pentaho.di.core.ObjectLocationSpecificationMethod;
 import org.pentaho.di.core.Result;
 import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
+import org.pentaho.di.core.database.DatabaseMetaInformation;
+import org.pentaho.di.core.database.Schema;
 import org.pentaho.di.core.exception.KettleDatabaseException;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.exception.KettleStepException;
@@ -25,6 +28,7 @@ import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.steps.tableinput.TableInputMeta;
 import org.pentaho.di.trans.steps.tableoutput.TableOutputMeta;
+import org.pentaho.di.ui.core.database.dialog.GetDatabaseInfoProgressDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +40,7 @@ public class DynamicJobServiceImpl implements DynamicJobService {
 
     private DatabaseConfig source;
     private DatabaseConfig target;
+    private String schemaName;
 
     public DynamicJobServiceImpl() {
     }
@@ -93,7 +98,7 @@ public class DynamicJobServiceImpl implements DynamicJobService {
 
         JobEntryCopy startCopy = JobMeta.createStartEntry();
         final Point location = new Point(50, 50);
-        startCopy.setLocation(location);
+        startCopy.setLocation(50,50);
         startCopy.setDrawn();
         jobMeta.addJobEntry(startCopy);
 
@@ -103,17 +108,24 @@ public class DynamicJobServiceImpl implements DynamicJobService {
             add(sourceMeta);
             add(targetMeta);
         }});
-
+        schemaName = "ALE97";
         String[] tablesWithSchema = new String[0];
         Database sourceDatabase = new Database(null, sourceMeta);
         try {
             sourceDatabase.connect();
             tablesWithSchema = sourceDatabase.getTablenames(true);
-            System.out.println(sourceDatabase.getSchemas()[0]);
-            System.out.println(sourceDatabase.getTablenames(sourceDatabase.getSchemas()[0], true)[0]);
-            sourceDatabase.disconnect();
+            DatabaseMetaInformation databaseMetaInformation = new GetDatabaseInfoProgressDialog(null,sourceMeta).open();
+            System.out.println(databaseMetaInformation.getSchemas()[0].getSchemaName());
+            for (Schema schema : databaseMetaInformation.getSchemas()) {
+                if (schemaName.equals(schema.getSchemaName())) {
+                    tablesWithSchema = schema.getItems();
+                }
+            }
+
         } catch (KettleDatabaseException e) {
             e.printStackTrace();
+        } finally {
+            sourceDatabase.disconnect();
         }
 //        String[] tables = filterOfTable(tablesWithSchema, sourceMeta.getDatabaseName());
         String[] tables = tablesWithSchema;
@@ -129,7 +141,7 @@ public class DynamicJobServiceImpl implements DynamicJobService {
             TableInputMeta tableInputMeta = new TableInputMeta();
             tableInputMeta.setDefault();
             tableInputMeta.setDatabaseMeta(sourceMeta);
-            tableInputMeta.setSQL("select * from " + table);
+            tableInputMeta.setSQL("select * from " + schemaName + "." + table);
             StepMeta tableInputStep = new StepMeta("table input", tableInputMeta);
             tableInputStep.setLocation(100, 300);
             tableInputStep.setDraw(true);
@@ -154,6 +166,7 @@ public class DynamicJobServiceImpl implements DynamicJobService {
             location.x = 250;
             location.y += 100;
             String sql = getSQLString(sourceMeta, tableInputMeta, transMeta);
+            System.out.println(sql);
 
             if (!Utils.isEmpty(sql)) {
                 JobEntrySQL jobEntrySQL = new JobEntrySQL("create " + table);
@@ -204,6 +217,9 @@ public class DynamicJobServiceImpl implements DynamicJobService {
                 database.getUser(),
                 database.getPassword()
         );
+        if ("Oracle".equals(database.getType()) && database instanceof OracleDatabaseConfig) {
+            databaseMeta.setServername("ora11g");
+        }
         if ("MySQL".equals(database.getType()) && database instanceof MySQLDatabaseConfig) {
             MySQLDatabaseConfig mySQLDatabase = (MySQLDatabaseConfig) database;
             Properties properties = new Properties();

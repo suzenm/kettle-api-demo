@@ -5,9 +5,9 @@
   <job_version/>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2020/08/24 11:07:07.537</created_date>
+  <created_date>2020/08/27 16:23:13.410</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2020/08/24 11:07:07.537</modified_date>
+  <modified_date>2020/08/27 16:23:13.410</modified_date>
   <parameters>
     </parameters>
   <connection>
@@ -19,7 +19,7 @@
     <port>1521</port>
     <username>tg_qs</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce64d9adbec9</password>
-    <servername/>
+    <servername>ora11g</servername>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
@@ -341,30 +341,30 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>650</xloc>
-      <yloc>250</yloc>
+      <xloc>50</xloc>
+      <yloc>50</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create TG_QS.LC_TPRODUCTMARKET</name>
+      <name>create BATCH_JOB_EXECUTION</name>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_VASTLY_REDEEM_RATIO DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_UNIT DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_RATIO DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_NAV_YEAR_RATE DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_PRODUCT_INCOME_RATE DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY EN_VALUE_LINE DOUBLE
-;
-ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
-;
-</sql>
+      <sql>CREATE TABLE BATCH_JOB_EXECUTION
+(
+  JOB_EXECUTION_ID DECIMAL(19)
+, VERSION DECIMAL(19)
+, JOB_INSTANCE_ID DECIMAL(19)
+, CREATE_TIME DATETIME
+, START_TIME DATETIME
+, END_TIME DATETIME
+, STATUS VARCHAR(10)
+, EXIT_CODE TEXT
+, EXIT_MESSAGE TEXT
+, LAST_UPDATED DATETIME
+, JOB_CONFIGURATION_LOCATION TEXT
+)
+;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -378,14 +378,14 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>trans TG_QS.LC_TPRODUCTMARKET</name>
+      <name>trans BATCH_JOB_EXECUTION</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcetg_qslc_tproductmarket_to_target.ktr</filename>
-      <transname>copy_multi_database_sourceTG_QS.LC_TPRODUCTMARKET_to_target</transname>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_job_execution_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_JOB_EXECUTION_to_target</transname>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -414,79 +414,15 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create TG_QS.LC_THPRODUCTMARKET</name>
+      <name>create BATCH_JOB_EXECUTION_CONTEXT</name>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>CREATE TABLE `TG_QS.LC_THPRODUCTMARKET`
+      <sql>CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT
 (
-  VC_TENANT_ID VARCHAR(32)
-, VC_DATE VARCHAR(8)
-, VC_PRODUCT_CODE VARCHAR(20)
-, VC_PRODUCT_NAME VARCHAR(200)
-, C_SHARE_TYPE CHAR(1)
-, EN_NAV DECIMAL(16, 8)
-, EN_TOTAL_SHARE DECIMAL(16, 2)
-, C_VASTLY_REDEEM_FLAG CHAR(1)
-, EN_VASTLY_REDEEM_RATIO DOUBLE
-, C_PRODUCT_STATE CHAR(1)
-, EN_FACE_VALUE DECIMAL(16, 8)
-, C_MONEY_TYPE VARCHAR(3)
-, VC_ISSUE_DATE VARCHAR(8)
-, VC_SETUP_DATE VARCHAR(8)
-, VC_ORGANIGER VARCHAR(36)
-, VC_PRODUCT_MANAGER VARCHAR(36)
-, VC_TA_NAME VARCHAR(100)
-, VC_TRUSTEE VARCHAR(36)
-, VC_TA_CODE VARCHAR(18)
-, EN_PRODUCT_INCOME DECIMAL(16, 2)
-, EN_PRODUCT_INCOME_UNIT DOUBLE
-, EN_PRODUCT_INCOME_RATIO DOUBLE
-, VC_NAV_DATE VARCHAR(8)
-, EN_TOTAL_NAV DECIMAL(16, 8)
-, C_PUBLISH_FLAG CHAR(1)
-, C_PRODUCT_INCOME_FLAG CHAR(1)
-, C_YIELD_FLAG CHAR(1)
-, C_NAV_TYPE CHAR(1)
-, EN_NAV_YEAR_RATE DOUBLE
-, EN_PRODUCT_INCOME_RATE DOUBLE
-, C_PRODUCT_INCOME_RATE_FLAG CHAR(1)
-, VC_HOPE_ALLOT_END_DATE VARCHAR(8)
-, VC_HOPE_REDEEM_END_DATE VARCHAR(8)
-, VC_PRODUCT_OPEN_DATE VARCHAR(8)
-, C_INCOME_FLAG CHAR(1)
-, EN_INST_MAX_REDEEM DECIMAL(16, 2)
-, EN_INDI_MAX_REDEEM DECIMAL(16, 2)
-, EN_INST_DAY_MAX_SUM_REDEEM DECIMAL(16, 2)
-, EN_INDI_DAY_MAX_SUM_REDEEM DECIMAL(16, 2)
-, EN_INST_DAY_MAX_SUM_BUY DECIMAL(16, 2)
-, EN_INDI_DAY_MAX_SUM_BUY DECIMAL(16, 2)
-, EN_INST_MAX_PURCHASE DECIMAL(16, 2)
-, EN_INDI_MAX_PURCHASE DECIMAL(16, 2)
-, EN_MIN_REDEMPTION_VOL DECIMAL(16, 2)
-, EN_MIN_APP_BIDS_AMOUNT_BY_INST DECIMAL(16, 2)
-, EN_MIN_APP_BIDS_AMOUNT_BY_INDI DECIMAL(16, 2)
-, EN_MIN_BIDS_AMOUNT_BY_INST DECIMAL(16, 2)
-, EN_MIN_BIDS_AMOUNT_BY_INDI DECIMAL(16, 2)
-, EN_MAX_SUBS_AMOUNT_BY_INST DECIMAL(16, 2)
-, EN_MAX_SUBS_AMOUNT_BY_INDI DECIMAL(16, 2)
-, EN_MIN_SUBS_AMOUNT_BY_INDI DECIMAL(16, 2)
-, EN_INDI_APP_SUBS_AMOUNT DECIMAL(16, 2)
-, EN_MIN_AMOUNT_BY_INST DECIMAL(16, 2)
-, EN_INST_APP_SUBS_AMOUNT DECIMAL(16, 2)
-, EN_TRADING_PRICE DECIMAL(16, 8)
-, EN_VALUE_LINE DOUBLE
-, EN_PRODUCT_SIZE DECIMAL(16, 2)
-, EN_GUARANTEED_NAV DECIMAL(16, 8)
-, C_INSERT_BY_MARKET CHAR(1)
-, C_OLD_PRODUCT_STATE CHAR(1)
-, C_CONVERT_STATUS CHAR(1)
-, C_PERIODIC_STATUS CHAR(1)
-, EN_AMOUNT_OF_PERIODIC_SUBS DECIMAL(16, 2)
-, EN_MIN_INTERCONVERT_VOL DECIMAL(16, 2)
-, GMT_CREATE DATETIME
-, GMT_MODIFIED DATETIME
-, L_NODE DOUBLE
+  JOB_EXECUTION_ID DECIMAL(19)
+, SHORT_CONTEXT TEXT
+, SERIALIZED_CONTEXT LONGTEXT
 )
 ;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
@@ -502,14 +438,14 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>trans TG_QS.LC_THPRODUCTMARKET</name>
+      <name>trans BATCH_JOB_EXECUTION_CONTEXT</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcetg_qslc_thproductmarket_to_target.ktr</filename>
-      <transname>copy_multi_database_sourceTG_QS.LC_THPRODUCTMARKET_to_target</transname>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_job_execution_context_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_JOB_EXECUTION_CONTEXT_to_target</transname>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -537,11 +473,337 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <yloc>250</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>create BATCH_JOB_EXECUTION_PARAMS</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE BATCH_JOB_EXECUTION_PARAMS
+(
+  JOB_EXECUTION_ID DECIMAL(19)
+, TYPE_CD VARCHAR(6)
+, KEY_NAME VARCHAR(100)
+, STRING_VAL VARCHAR(250)
+, DATE_VAL DATETIME
+, LONG_VAL DECIMAL(19)
+, DOUBLE_VAL DOUBLE
+, IDENTIFYING CHAR(1)
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>350</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans BATCH_JOB_EXECUTION_PARAMS</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_job_execution_params_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_JOB_EXECUTION_PARAMS_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>350</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create BATCH_JOB_EXECUTION_PARAMS2</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE BATCH_JOB_EXECUTION_PARAMS2
+(
+  JOB_EXECUTION_ID DECIMAL(19)
+, TYPE_CD VARCHAR(6)
+, KEY_NAME VARCHAR(100)
+, STRING_VAL VARCHAR(250)
+, DATE_VAL DATETIME
+, LONG_VAL DECIMAL(19)
+, DOUBLE_VAL DOUBLE
+, IDENTIFYING CHAR(1)
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>450</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans BATCH_JOB_EXECUTION_PARAMS2</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_job_execution_params2_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_JOB_EXECUTION_PARAMS2_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>450</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create BATCH_JOB_INSTANCE</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE BATCH_JOB_INSTANCE
+(
+  JOB_INSTANCE_ID DECIMAL(19)
+, VERSION DECIMAL(19)
+, JOB_NAME VARCHAR(100)
+, JOB_KEY VARCHAR(32)
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>550</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans BATCH_JOB_INSTANCE</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_job_instance_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_JOB_INSTANCE_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>550</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create BATCH_STEP_EXECUTION</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE BATCH_STEP_EXECUTION
+(
+  STEP_EXECUTION_ID DECIMAL(19)
+, VERSION DECIMAL(19)
+, STEP_NAME VARCHAR(100)
+, JOB_EXECUTION_ID DECIMAL(19)
+, START_TIME DATETIME
+, END_TIME DATETIME
+, STATUS VARCHAR(10)
+, COMMIT_COUNT DECIMAL(19)
+, READ_COUNT DECIMAL(19)
+, FILTER_COUNT DECIMAL(19)
+, WRITE_COUNT DECIMAL(19)
+, READ_SKIP_COUNT DECIMAL(19)
+, WRITE_SKIP_COUNT DECIMAL(19)
+, PROCESS_SKIP_COUNT DECIMAL(19)
+, ROLLBACK_COUNT DECIMAL(19)
+, EXIT_CODE TEXT
+, EXIT_MESSAGE TEXT
+, LAST_UPDATED DATETIME
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>650</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans BATCH_STEP_EXECUTION</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_step_execution_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_STEP_EXECUTION_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>650</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create BATCH_STEP_EXECUTION_CONTEXT</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT
+(
+  STEP_EXECUTION_ID DECIMAL(19)
+, SHORT_CONTEXT TEXT
+, SERIALIZED_CONTEXT LONGTEXT
+)
+;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>target</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>750</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>trans BATCH_STEP_EXECUTION_CONTEXT</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\copy_multi_database_sourcebatch_step_execution_context_to_target.ktr</filename>
+      <transname>copy_multi_database_sourceBATCH_STEP_EXECUTION_CONTEXT_to_target</transname>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel/>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <suppress_result_data>N</suppress_result_data>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>650</xloc>
+      <yloc>750</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
       <from>Start</from>
-      <to>create TG_QS.LC_TPRODUCTMARKET</to>
+      <to>create BATCH_JOB_EXECUTION</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -549,8 +811,8 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>create TG_QS.LC_TPRODUCTMARKET</from>
-      <to>trans TG_QS.LC_TPRODUCTMARKET</to>
+      <from>create BATCH_JOB_EXECUTION</from>
+      <to>trans BATCH_JOB_EXECUTION</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -558,8 +820,8 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>trans TG_QS.LC_TPRODUCTMARKET</from>
-      <to>create TG_QS.LC_THPRODUCTMARKET</to>
+      <from>trans BATCH_JOB_EXECUTION</from>
+      <to>create BATCH_JOB_EXECUTION_CONTEXT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -567,8 +829,98 @@ ALTER TABLE `TG_QS.LC_TPRODUCTMARKET` MODIFY L_NODE DOUBLE
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create TG_QS.LC_THPRODUCTMARKET</from>
-      <to>trans TG_QS.LC_THPRODUCTMARKET</to>
+      <from>create BATCH_JOB_EXECUTION_CONTEXT</from>
+      <to>trans BATCH_JOB_EXECUTION_CONTEXT</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans BATCH_JOB_EXECUTION_CONTEXT</from>
+      <to>create BATCH_JOB_EXECUTION_PARAMS</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create BATCH_JOB_EXECUTION_PARAMS</from>
+      <to>trans BATCH_JOB_EXECUTION_PARAMS</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans BATCH_JOB_EXECUTION_PARAMS</from>
+      <to>create BATCH_JOB_EXECUTION_PARAMS2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create BATCH_JOB_EXECUTION_PARAMS2</from>
+      <to>trans BATCH_JOB_EXECUTION_PARAMS2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans BATCH_JOB_EXECUTION_PARAMS2</from>
+      <to>create BATCH_JOB_INSTANCE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create BATCH_JOB_INSTANCE</from>
+      <to>trans BATCH_JOB_INSTANCE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans BATCH_JOB_INSTANCE</from>
+      <to>create BATCH_STEP_EXECUTION</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create BATCH_STEP_EXECUTION</from>
+      <to>trans BATCH_STEP_EXECUTION</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>trans BATCH_STEP_EXECUTION</from>
+      <to>create BATCH_STEP_EXECUTION_CONTEXT</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create BATCH_STEP_EXECUTION_CONTEXT</from>
+      <to>trans BATCH_STEP_EXECUTION_CONTEXT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
